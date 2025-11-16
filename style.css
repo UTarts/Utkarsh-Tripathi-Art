@@ -1,0 +1,755 @@
+/* --- 1. Font Imports --- */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Luxurious+Roman&display=swap");
+
+/* --- 2. Root Variables --- */
+:root {
+    --font-heading: 'EB Garamond', serif;
+    --font-body: 'Luxurious Roman', sans-serif;
+    --font-accent: 'Italianno', cursive;
+    
+    --color-bg: #0a0a0a;
+    --color-bg-section: #111111;
+    --color-text: #ffffff;
+    --color-text-muted: #a0a0a0;
+    --color-border: #333333;
+    --color-accent: #b9976c; 
+}
+
+/* --- 3. Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 4. Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    font-weight: 400; 
+    line-height: 1.3;
+}
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+p { margin-bottom: 1.5rem; max-width: 65ch; }
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover { color: var(--color-text); }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+}
+.font-accent {
+    font-family: var(--font-accent);
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    font-weight: 400;
+}
+
+/* --- 5. Reusable Components --- */
+.cta-button {
+    display: inline-block;
+    background: none;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+.cta-button:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+}
+
+/* --- 6. Header (NEW: Static) --- */
+.header {
+    position: absolute; /* Sits at the top, scrolls with content */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent; 
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 80px;
+    padding: 0 2rem;
+}
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+.nav-links a {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-text);
+}
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+.hamburger .line {
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* --- 7. Hero Sections (NEW: Parallax) --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0 2rem;
+    height: 100vh;
+    min-height: 700px;
+    
+    /* This creates the sticky/parallax effect */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+}
+.hero::after { /* Dark overlay */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.9) 100%);
+    z-index: 1;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero-content h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-text);
+    line-height: 1.1;
+}
+.hero-content p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-text);
+    max-width: 50ch;
+    margin: 1.5rem auto 0 auto;
+    font-weight: 300;
+}
+/* Specific Hero Backgrounds */
+#home-hero {
+    background-image: url('images/Original2.webp');
+}
+.page-hero {
+    height: 60vh;
+    min-height: 400px;
+    background-image: url('images/originalhero.webp');
+}
+.page-hero h1 {
+    font-style: normal;
+}
+
+/* --- 8. Page Sections --- */
+section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2; /* Sits on top of the fixed hero */
+    background: var(--color-bg); /* Opaque background */
+}
+/* First section after a hero needs to be opaque */
+section.first-section {
+    background-color: var(--color-bg);
+}
+.artist-statement {
+    background-color: var(--color-bg-section);
+    text-align: center;
+}
+.artist-statement p {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-style: italic;
+    color: var(--color-text-muted);
+    max-width: 40ch;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.about-artist {
+    background: var(--color-bg-section);
+}
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+}
+.about-image img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+.about-bio h3 {
+    font-size: 2.5rem;
+}
+.about-bio p.subtitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+.as-seen-in {
+    text-align: center;
+    padding-top: 3rem;
+}
+.as-seen-in h4 {
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+.as-seen-in-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    opacity: 0.3;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+}
+.process {
+    background-color: var(--color-bg-section);
+}
+.process-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.process-image {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+}
+.process-image img {
+    width: 100%;
+    display: block;
+}
+.process-video {
+    position: relative;
+    padding-bottom: 167.77%; /* 9:16 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px; /* Constrain video width */
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+}
+.process-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.process-video h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+/* --- 9. Grids (NEW: Mobile 2-wide) --- */
+.art-grid, .commission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2-wide on mobile */
+    gap: 1.5rem;
+}
+.art-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    color: var(--color-text-muted);
+    transition: background 0.3s ease;
+    position: relative;
+}
+.art-card:hover {
+    background: var(--color-bg-section);
+}
+.art-card-image {
+    /* --- MODIFICATION (Request 1) --- */
+    /* height: 350px; */ /* REMOVED to use aspect-ratio */
+    aspect-ratio: 1 / 1; /* ADDED for square frames */
+    overflow: hidden;
+}
+.art-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-out;
+}
+.art-card:hover .art-card-image img {
+    transform: scale(1.05);
+}
+.art-card-info {
+    padding: 1.5rem;
+}
+.art-card-info h3 {
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+.sold-out {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+.commission-item {
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    cursor: pointer;
+}
+.commission-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease-out;
+    
+}
+.commission-item:hover img {
+    transform: scale(1.05);
+}
+.view-gallery-button {
+    display: block;
+    max-width: 300px;
+    margin: 3rem auto 0 auto;
+    grid-column: 1 / -1; /* Spans full grid width */
+}
+
+/* --- 10. Pricing Section --- */
+.pricing-table {
+    display: grid;
+    grid-template-columns: 1fr; /* 1-wide on mobile */
+    gap: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.price-card {
+    border: 1px solid var(--color-border);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.price-card h3 {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+.price-card .price {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin: 1rem 0;
+}
+.price-card ul {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+.price-card ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #222;
+}
+.price-card ul li::before {
+    content: '•';
+    color: var(--color-accent);
+    margin-right: 10px;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* --- 11. Originals Page Showcase (NEW) --- */
+.art-showcase-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+.art-showcase-item:first-of-type {
+    padding-top: 80px; /* Offset for static header */
+}
+.art-image {
+    border: 1px solid var(--color-border);
+    /* --- MODIFICATION (Request 3) --- */
+    /* cursor: zoom-in; */ /* REMOVED lightbox cursor */
+    position: relative; /* ADDED for image stacking */
+    overflow: hidden;
+}
+.art-image img {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+}
+.art-image:hover img {
+    transform: scale(1.02);
+}
+.art-details {
+    padding: 0 1rem;
+}
+.art-details h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.art-details .sold-out {
+    position: static;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+.art-details-meta {
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+.art-details-meta span {
+    margin-right: 1.5rem;
+}
+.art-details .cta-button {
+    margin-top: 2rem;
+}
+
+/* --- MODIFICATION (Request 3) --- */
+/* ADDED styles for hover/flip feature */
+.art-image-hover {
+    cursor: pointer;
+}
+.art-image-hover .img-primary,
+.art-image-hover .img-secondary {
+    /* Styles are inherited from .art-image img */
+    transition: opacity 0.4s ease-in-out;
+}
+.art-image-hover .img-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* --- MODIFICATION (Touch Icon) --- */
+.touch-icon {
+    display: none; /* Hidden by default on desktop */
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 10;
+    pointer-events: none; /* So the icon doesn't block the click */
+    transition: opacity 0.3s ease;
+}
+
+/* Hide the icon after it has been flipped */
+.art-image-hover.is-flipped .touch-icon {
+    opacity: 0;
+}
+
+/* Desktop: Hover effect */
+@media (hover: hover) and (min-width: 769px) {
+    .art-image-hover:hover .img-secondary {
+        opacity: 1;
+    }
+    .art-image-hover:hover .img-primary {
+        opacity: 0;
+    }
+}
+
+/* Mobile: Click (is-flipped) class */
+.art-image-hover.is-flipped .img-secondary {
+    opacity: 1;
+}
+.art-image-hover.is-flipped .img-primary {
+    opacity: 0;
+}
+/* --- END MODIFICATION (Request 3) --- */
+
+
+/* --- 12. Footer --- */
+.footer {
+    text-align: center;
+    padding: 4rem 2rem 2rem 2rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-section);
+}
+/* ADD THIS NEW RULE */
+.footer p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+}
+.footer h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.footer .social-links {
+    margin: 2.5rem 0;
+}
+.footer .social-links a {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    margin: 0 1.25rem;
+}
+.footer .social-links a:hover {
+    color: var(--color-accent);
+}
+.footer .copyright {
+    font-size: 0.8rem;
+    color: #777;
+}
+.footer .copyright a {
+    color: #777;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+.footer .copyright a:hover {
+    color: var(--color-text-muted);
+}
+
+/* --- 13. Lightbox --- */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 2rem;
+    
+    /* Centering */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox-content {
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 1px solid var(--color-border);
+}
+#lightbox-caption {
+    margin: 1rem auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    font-family: var(--font-body);
+}
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2001;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+    font-weight: 300;
+}
+.lightbox-close:hover {
+    color: var(--color-accent);
+}
+
+/* --- 14. Responsive Media Queries --- */
+@media (max-width: 768px) {
+    /* --- Mobile Header --- */
+    .nav { height: 70px; }
+    .logo {
+        font-size: 1em; /* Smaller logo on mobile */
+    }
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 70%;
+        background: var(--color-bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        gap: 3rem;
+        border-left: 1px solid var(--color-border);
+    }
+    .nav-links.nav-active { right: 0; }
+    .nav-links a { font-size: 1.1rem; }
+    .hamburger { display: block; }
+    .hamburger.active .line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+    .hamburger.active .line:nth-child(2) { opacity: 0; }
+    .hamburger.active .line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+    
+    /* --- Mobile Layouts --- */
+    section { padding: 4rem 1.5rem; }
+    .about-content { flex-direction: column; }
+    .process-wrapper { grid-template-columns: 1fr; }
+    
+    .art-card-info h3 {
+        font-size: 1rem;
+    }
+    .art-card-info p {
+        font-size: 0.85rem;
+        margin-bottom: 0%;
+    }
+
+    /* --- SPECIAL GRID CONTROL CLASS --- */
+    .grid-item-full-width-mobile {
+        grid-column: 1 / -1; /* This makes it span full width */
+    }
+    .grid-item-full-width-mobile .art-card-image {
+        height: 350px; /* Taller image if it's full-width */
+    }
+    
+    .pricing-table {
+        grid-template-columns: 1fr;
+    }
+    
+    .art-showcase-item {
+        padding: 3rem 0;
+    }
+    .art-showcase-item:first-of-type {
+        padding-top: 100px; /* Offset for 70px header + padding */
+    }
+    .art-details {
+        text-align: center;
+    }
+
+    /* --- Mobile Lightbox --- */
+    .lightbox-content { max-height: 80vh; }
+    #lightbox-caption { font-size: 0.9rem; }
+    .lightbox-close { top: 20px; right: 20px; font-size: 2rem;}
+
+    .touch-icon {
+        display: block;
+    }
+}
+
+/* --- Desktop Layouts --- */
+@media (min-width: 769px) {
+
+    .art-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .commission-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .process-wrapper {
+        grid-template-columns: 1fr 0.6fr;
+    }
+    .art-showcase-item {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+    /* Alternating layout for showcase */
+    .art-showcase-item:nth-child(even) .art-image {
+        order: 2;
+    }
+    .art-details {
+        padding: 0 2rem;
+    }
+}
+@media (min-width: 993px) {
+    .pricing-table {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1200px;
+    }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://utkarshtripathi.utarts.in/sitemap.xml
